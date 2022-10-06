@@ -10,14 +10,14 @@ class AuthControllerTest extends TestCase
     public function test_user_registration_happy_path()
     {
         $response = $this->postJson('/register', [
-            'email' => 'demo@noria.test',
+            'email' => 'demo@example.test',
             'phone_number' => '1234567890',
             'password' => 'demo_password',
         ]);
 
         $this->assertDatabaseCount('users', 1);
         $this->assertDatabaseHas('users', [
-            'email' => 'demo@noria.test',
+            'email' => 'demo@example.test',
             'phone_number' => '1234567890',
         ]);
 
@@ -34,13 +34,13 @@ class AuthControllerTest extends TestCase
     public function test_user_registration_validation()
     {
         $this->postJson('/register', [
-            'email' => 'demo@noria.test',
+            'email' => 'demo@example.test',
             'phone_number' => '1234567890',
             'password' => 'demo_password',
         ]);
 
         $response = $this->postJson('/register', [
-            'email' => 'demo@noria.test',
+            'email' => 'demo@example.test',
             'phone_number' => '1234567890',
             'password' => 'demo_password',
         ]);
@@ -62,7 +62,7 @@ class AuthControllerTest extends TestCase
     public function test_user_login_happy_path()
     {
         $user = User::factory()->create([
-            'email' => 'demo@noria.test',
+            'email' => 'demo@example.test',
             'phone_number' => '1234567890',
             'password' => bcrypt('demo_password'),
         ]);
@@ -83,7 +83,7 @@ class AuthControllerTest extends TestCase
     public function test_user_profile_happy_path()
     {
         $user = User::factory()->create([
-            'email' => 'demo@noria.test',
+            'email' => 'demo@example.test',
             'phone_number' => '1234567890',
             'password' => 'demo_password',
         ]);
